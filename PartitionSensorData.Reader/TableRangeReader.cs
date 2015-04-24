@@ -30,7 +30,7 @@ namespace PartitionSensorData.Reader
                             && String.Compare(s.RowKey, @from.Add(DefaultRange).ToUnixTime(), StringComparison.Ordinal) < 0)
                 .Select(t => new SensorData
                 {
-                    At = t.Timestamp.DateTime,
+                    At = DateTimeExtensions.FromUnixTimestamp(double.Parse(t.RowKey)).ToUniversalTime(),
                     SensorId = partition,
                     Site = table,
                     Temperature = t.Temperature

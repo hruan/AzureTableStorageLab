@@ -56,7 +56,7 @@ namespace PartitionSensorData.Tests
         public async Task WhenReadingRangeFromTable_ReturnElementsWithinAFiveMinuteTimespan()
         {
             var token = _table.GetSharedAccessSignature(null, QueryPolicyName);
-            var sut = new Reader.TableRangeReader(AccountName, token);
+            var sut = new Reader.AzureStorageTableRangeReader(AccountName, token);
             var actual = (await sut.ReadRangeAsync(TableName, PartitionName, StartTime).ConfigureAwait(false));
 
             Assert.All(actual, s => Assert.True(s.At <= StartTime.AddMinutes(5)));
@@ -74,7 +74,7 @@ namespace PartitionSensorData.Tests
                 startTime.ToUnixTime(),
                 PartitionName,
                 endTime.ToUnixTime());
-            var sut = new Reader.TableRangeReader(AccountName, token);
+            var sut = new Reader.AzureStorageTableRangeReader(AccountName, token);
             var actual = await sut.ReadRangeAsync(TableName, PartitionName, StartTime).ConfigureAwait(false);
 
             Assert.All(actual, s => Assert.True(s.At >= startTime && s.At <= endTime));
@@ -91,7 +91,7 @@ namespace PartitionSensorData.Tests
                 startTime.ToUnixTime(),
                 PartitionName,
                 startTime.AddMinutes(5).ToUnixTime());
-            var sut = new Reader.TableRangeReader(AccountName, token);
+            var sut = new Reader.AzureStorageTableRangeReader(AccountName, token);
             var actual = await sut.ReadRangeAsync(TableName, PartitionName, StartTime).ConfigureAwait(false);
 
             Assert.Empty(actual);
@@ -101,7 +101,7 @@ namespace PartitionSensorData.Tests
         public async Task WhenReadingRangeFromTableWithoutAccess_ThrowsAnException()
         {
             var token = _table.GetSharedAccessSignature(null, InsertPolicyName);
-            var sut = new Reader.TableRangeReader(AccountName, token);
+            var sut = new Reader.AzureStorageTableRangeReader(AccountName, token);
             await Assert.ThrowsAsync<StorageException>(
                 () => sut.ReadRangeAsync(TableName, PartitionName, StartTime)
                     .ContinueWith(t => t.Result.ToList()))

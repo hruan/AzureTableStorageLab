@@ -43,9 +43,20 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PartitionSensorData.Common\PartitionSensorData.Common.csproj">
+      <Project>{47250340-abe3-44b5-9642-fd767ca4f526}</Project>
+      <Name>PartitionSensorData.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PartitionSensorData.Reader\PartitionSensorData.Reader.csproj">
+      <Project>{6a34534c-8f33-4e31-b9ca-fe1e8745d716}</Project>
+      <Name>PartitionSensorData.Reader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

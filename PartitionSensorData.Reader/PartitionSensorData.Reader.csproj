@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TableRangeReader.cs" />
+    <Compile Include="AzureStorageTableRangeReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableSensorData.cs" />
   </ItemGroup>

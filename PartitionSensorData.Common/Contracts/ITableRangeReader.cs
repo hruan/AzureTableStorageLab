@@ -7,6 +7,6 @@ namespace PartitionSensorData.Common.Contracts
 {
     public interface ITableRangeReader
     {
-        Task<IEnumerable<SensorData>> ReadRangeAsync(string table, string partition, DateTime from);
+        Task<IEnumerable<SensorData>> ReadRangeAsync(string table, string partition, DateTime from, TimeSpan stan);
     }
 }
